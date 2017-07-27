@@ -27,4 +27,3 @@ function startGame() {
 //onsole.log(cardObj[1].BasicCard.front);
 }
 startGame();
-console.log(cardObj[1](BasicCard.front));
