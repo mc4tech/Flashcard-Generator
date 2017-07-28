@@ -1,29 +1,58 @@
 var BasicCard = require("./BasicCard.js");
 var inquirer = require("inquirer");
-var cardObj = {};
+var cardInfo = require("./basic.json");
+var cardArr = [];
 var score = 0;
+var indexCount = 0;
 
-
+//builds the cards and pushes into cardArr
 function buildCards() {
-  cardObj.firstPresident = new BasicCard("Who was the first president of the United States?", "George Washington");
 
-  // "Who was the first president of the United States?"
-  console.log(cardObj.firstPresident.front); 
+  var currentCard = "";
 
-  // "George Washington"
-  console.log(cardObj.firstPresident.back); 
-
-  cardObj.CowboysSB = new BasicCard("How many Superbowls have the Cowboys won?", "5");
-  console.log(cardObj.CowboysSB.front);
-  console.log(cardObj.CowboysSB.back);
-
-  cardObj.gaCapital = new BasicCard("What's the capital of Georgia?", "Atlanta");
-
+  for (var i = 0; i < cardInfo.length; i++) {
+    currentCard = new BasicCard(cardInfo[i].front, cardInfo[i].back);
+    cardArr.push(currentCard);
+  }
+  //calls the startGame function and passes args
+  startGame(score, cardArr, indexCount);
 }
 
-function startGame() {
-  buildCards();
- //onsole.log("length" + cardObj.length);
-//onsole.log(cardObj[1].BasicCard.front);
+function startGame(score, cardArray, indexCount) {
+  // tests if there are more questions to ask
+  if (indexCount < cardArray.length) {
+    promptUser(cardArray, indexCount, score);
+  }else {
+    console.log("Game Over!\nYour score is : " + score);
+  }
 }
-startGame();
+
+function promptUser(cardArray, indexCount, score) {
+
+  var card = cardArray[indexCount];
+  //tells the user the card/question #
+  console.log("\nQuestion " + (indexCount + 1));
+  // Asks the user the question on front of the card
+  inquirer.prompt([{
+    type: "input",
+    name: "text",
+    message: card.front + "\nAnswer:"
+  }]).then(function(answer) {
+
+    if (answer.text.trim().toLowerCase() === card.back.trim().toLowerCase()) {
+      score++;
+      console.log("That's right! Keep it up!" + "\n");
+    }else {
+      // Otherwise let them know they were incorrect
+      console.log("Wrong! The correct answer is '" + card.back + "'." + "\n");
+    }
+    
+    indexCount++;
+    
+    startGame(score, cardArray, indexCount);
+  });
+}
+
+
+// calling the buildCards function to start the game
+buildCards();
