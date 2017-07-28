@@ -1,0 +1,33 @@
+[
+  {
+    "type": "BasicCard",
+    "front": "Who was the first president of the United States?",
+    "back": "George Washington"
+  },
+  {
+    "type": "BasicCard",
+    "front": "How many SuperBowls have the Cowboys won?",
+    "back": "5"
+  },
+  {
+    "type": "BasicCard",
+    "front": "What is the capital of Georgia?",
+    "back": "Atlanta"
+  },
+  {
+    "type": "ClozeCard",
+    "text": "The Falcons drafted quarterback Michael Vick in 2001.",
+    "cloze": "Michael Vick"
+  },
+  {
+    "type": "ClozeCard",
+    "text": "Arthur Blank is known for his philanthropy and ownership of the Falcons.",
+    "cloze": "Arthur Blank"
+  },
+  {
+    "type": "ClozeCard",
+    "text": "Kobe Bryant is also known as the Black Mamba.",
+    "cloze": "Kobe Bryant"
+  }
+]
+
